@@ -1,14 +1,14 @@
 import React from 'react'
-import { Footer, Navbar, Product } from "../components"
+import { Footer, Navbar, Products } from "../components"
 
-const Products = () => {
+const Product = () => {
   return (
     <>
       <Navbar />
-      <Product />
+      <Products />
       <Footer />
     </>
   )
 }
 
-export default Products
+export default Product
