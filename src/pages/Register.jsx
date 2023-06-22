@@ -38,6 +38,15 @@ const Register = () => {
                                     placeholder="Password"
                                 />
                             </div>
+                            <div className="form  my-3">
+                                <label for="confirmPassword">Confirm Password</label>
+                                <input
+                                    type="password"
+                                    className="form-control"
+                                    id="confirmPassword"
+                                    placeholder="Confirm Password"
+                                />
+                            </div>
                             <div className="my-3">
                                 <p>Already has an account? <Link to="/login" className="text-decoration-underline text-info">Login</Link> </p>
                             </div>

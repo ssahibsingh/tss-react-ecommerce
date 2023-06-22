@@ -6,7 +6,6 @@ import data from "../data";
 const Product = () => {
   const { id } = useParams();
   const [product, setProduct] = useState([]);
-
   useEffect(() => {
     data.filter((item) => {
       console.log(item.id, id)
@@ -16,7 +15,7 @@ const Product = () => {
       }
       return null
     })
-  })
+  }, [])
 
   const ShowProduct = () => {
     return (
