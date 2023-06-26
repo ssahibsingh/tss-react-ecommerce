@@ -1,9 +1,20 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Product } from "../components"
-import data from '../data'
+import axios from 'axios'
 
 
 const Products = () => {
+    const [data, setData] = useState([])
+    const [error, setError] = useState(false)
+    useEffect(() => {
+        axios.get('http://localhost:5000/api/product').then((res) => {
+            console.log(res.data)
+            setData(res.data.products)
+        }).catch((err) => {
+            console.log(err)
+            setError(true)
+        })
+    }, [])
     return (
         <>
             <div className="container my-3 py-3">
@@ -14,19 +25,17 @@ const Products = () => {
                     </div>
                 </div>
                 <div className="row justify-content-center">
-                    {data.map((product) => {
+                    {data && data.map((product) => {
                         return (
                             <Product data={product} />
                         );
                     })}
+
+                    {error && <p className='text-danger display-6 text-center'>Something went wrong</p>}
                 </div>
             </div>
         </>
     )
 }
-
-// Attribute
-// Data Sharing
-
 
 export default Products

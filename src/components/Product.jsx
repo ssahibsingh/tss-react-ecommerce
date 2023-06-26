@@ -3,10 +3,11 @@ import { Link } from 'react-router-dom'
 
 const Product2 = ({data}) => {
   const product = data
+  console.log(product)
   return (
     <>
-      <div id={product.id} key={product.id} className="col-md-4 col-sm-6 col-xs-8 col-12 mb-4">
-        <div className="card text-center h-100" key={product.id}>
+      <div id={product.productId} key={product.productId} className="col-md-4 col-sm-6 col-xs-8 col-12 mb-4">
+        <div className="card text-center h-100" key={product.productId}>
           <img
             className="card-img-top p-3"
             src={product.image}
@@ -25,7 +26,7 @@ const Product2 = ({data}) => {
             <li className="list-group-item lead">$ {product.price}</li>
           </ul>
           <div className="card-body">
-            <Link to={"/product/" + product.id} className="btn btn-dark m-1">
+            <Link to={"/product/" + product.productId} className="btn btn-dark m-1">
               Buy Now
             </Link>
             <button className="btn btn-dark m-1" >

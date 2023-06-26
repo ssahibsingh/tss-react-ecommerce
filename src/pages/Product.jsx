@@ -1,21 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Footer, Navbar } from "../components";
-import data from "../data";
+import axios from "axios";
 
 const Product = () => {
   const { id } = useParams();
   const [product, setProduct] = useState([]);
+  const [error, setError] = useState(false);
   useEffect(() => {
-    data.filter((item) => {
-      console.log(item.id, id)
-      if (item.id.toString() === id) {
-        setProduct(item)
-        return item
-      }
-      return null
+    axios.get(`http://localhost:5000/api/product/${id}`).then((res) => {
+      // console.log(res.data.product[0])
+      setProduct(res.data.product[0])
+    }).catch((err) => {
+      console.log(err)
+      setError(true)
     })
-  }, [])
+  }, [id])
 
   const ShowProduct = () => {
     return (
@@ -55,57 +55,13 @@ const Product = () => {
       </>
     );
   };
-
-  // const ShowSimilarProduct = () => {
-  //   return (
-  //     <>
-  //       <div className="py-4 my-4">
-  //         <div className="d-flex">
-  //           {similarProducts.map((item) => {
-  //             return (
-  //               <div key={item.id} className="card mx-4 text-center">
-  //                 <img
-  //                   className="card-img-top p-3"
-  //                   src={item.image}
-  //                   alt="Card"
-  //                   height={300}
-  //                   width={300}
-  //                 />
-  //                 <div className="card-body">
-  //                   <h5 className="card-title">
-  //                     {item.title.substring(0, 15)}...
-  //                   </h5>
-  //                 </div>
-  //                 {/* <ul className="list-group list-group-flush">
-  //                   <li className="list-group-item lead">${product.price}</li>
-  //                 </ul> */}
-  //                 <div className="card-body">
-  //                   <Link
-  //                     to={"/product/" + item.id}
-  //                     className="btn btn-dark m-1"
-  //                   >
-  //                     Buy Now
-  //                   </Link>
-  //                   <button
-  //                     className="btn btn-dark m-1"
-  //                     onClick={() => addProduct(item)}
-  //                   >
-  //                     Add to Cart
-  //                   </button>
-  //                 </div>
-  //               </div>
-  //             );
-  //           })}
-  //         </div>
-  //       </div>
-  //     </>
-  //   );
-  // };
   return (
     <>
       <Navbar />
       <div className="container">
-        <div className="row"><ShowProduct /></div>
+        <div className="row">
+          {error ? <p className='text-danger display-6 text-center'>Something went wrong</p> : <ShowProduct />}
+        </div>
       </div>
       <Footer />
     </>
