@@ -8,7 +8,7 @@ const Product = () => {
   const [product, setProduct] = useState([]);
   const [error, setError] = useState(false);
   useEffect(() => {
-    axios.get(`http://localhost:5000/api/product/${id}`).then((res) => {
+    axios.get(`https://tss-backend-aqx2.onrender.com/api/product/${id}`).then((res) => {
       // console.log(res.data.product[0])
       setProduct(res.data.product[0])
     }).catch((err) => {
